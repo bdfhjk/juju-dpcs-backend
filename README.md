@@ -58,7 +58,7 @@ You are very welcome to do so, and we'd love your feedback about the solution an
 
 First clone the repo 
 
-    git clone --recursive https://github.com/SaMnCo/juju-dpcs-project dpcs
+    git clone --recursive https://github.com/SaMnCo/juju-dpcs-backend dpcs
 
 Then create a configuration file from the template
 
