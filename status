@@ -26,10 +26,10 @@
 
 
 #####################################################################
-Demo:
-Complete:
-DateOfTest:
-TestedBy:
-InfrastructureStatus:
-PostDeployStatus:
-History:
+Demo: Data Powered Crash Solver
+Complete: no
+DateOfTest: 20160306
+TestedBy: Samuel Cozannet
+InfrastructureStatus: AWS OK
+PostDeployStatus: AWS OK
+History: first deployment

@@ -12,19 +12,18 @@
 # Validating I am running on debian-like OS
 [ -f /etc/debian_version ] || {
 	echo "We are not running on a Debian-like system. Exiting..."
-	exit 0
+	exit 1
 }
 
 # Load Configuration
 MYNAME="$(readlink -f "$0")"
 MYDIR="$(dirname "${MYNAME}")"
-MYCONF="${MYDIR}/../etc/demo.conf"
+MYCONF="project.conf"
 
-for file in "${MYCONF}" $(find ${MYDIR}/../lib -name "*.sh") ; do
-	[ -f ${file} ] && source ${file} || { 
-		echo "Could not find required files. Exiting..."
-		exit 0
-	}
+for file in $(find ${MYDIR}/../etc -name "${MYCONF}") $(find ${MYDIR}/../lib -name "*lib*.sh" | sort) ; do
+	echo Sourcing ${file}
+	source ${file}
+	sleep 1
 done 
 
 # Check install of all dependencies

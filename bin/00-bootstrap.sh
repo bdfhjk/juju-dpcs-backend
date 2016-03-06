@@ -1,7 +1,7 @@
 #!/bin/bash
 #####################################################################
 #
-# Initialize Demo environment
+# Initialize Juju environment 
 #
 # Notes: 
 # 
@@ -12,23 +12,22 @@
 # Validating I am running on debian-like OS
 [ -f /etc/debian_version ] || {
 	echo "We are not running on a Debian-like system. Exiting..."
-	exit 0
+	exit 1
 }
 
 # Load Configuration
 MYNAME="$(readlink -f "$0")"
 MYDIR="$(dirname "${MYNAME}")"
-MYCONF="${MYDIR}/../etc/demo.conf"
+MYCONF="project.conf"
 
-for file in "${MYCONF}" $(find ${MYDIR}/../lib -name "*.sh") ; do
-	[ -f ${file} ] && source ${file} || { 
-		echo "Could not find required files. Exiting..."
-		exit 0
-	}
+for file in $(find ${MYDIR}/../etc -name "${MYCONF}") $(find ${MYDIR}/../lib -name "*lib*.sh" | sort) ; do
+	echo Sourcing ${file}
+	source ${file}
+	sleep 1
 done 
 
 # Check install of all dependencies
-log debug Validating dependencies
+bash::lib::log debug Validating dependencies
 bash::lib::ensure_cmd_or_install_package_apt jq jq
 bash::lib::ensure_cmd_or_install_package_apt awk awk
 bash::lib::ensure_cmd_or_install_package_apt juju juju juju-core juju-deployer juju-quickstart python-jujuclient
